@@ -21,15 +21,27 @@ my_field = forms.CharField(label="My field", widget=JsTreeWidget(url=reverse("ap
 - Ajax request are by nodes, so make sure "children" key in response must be true and not list.
 
 
+## Installation
+
+- add jstree to your INSTALLED_APPS in your project settings
+```python
+INSTALLED_APPS = (
+    ...
+    'jstree',
+    ...
+)
+```
+
+
 ## Configuration
 
 - To use a different theme, include theme folder on accessible django static directory and override widget class Media to serve correct css file.
 ```python
-class BoostrapJsTreeWidget(JsTreeWidget):
+class BootstrapJsTreeWidget(JsTreeWidget):
     class Media(JsTreeWidget.Media):
         css = {
             'all': (
-                'jstree/css/jstree/themes/proton/style.min.css/',
+                'custom/static/directory/proton/style.min.css/',
             )
         }
 
