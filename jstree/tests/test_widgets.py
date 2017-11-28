@@ -9,17 +9,21 @@ from django.template import Template
 
 
 class JsTreeWidgetTestCase(TestCase):
-    def get_widget(self):
-        return widgets.JsTreeWidget(url="/test/url/")
+    def get_widget(self, result_hidden=False):
+        return widgets.JsTreeWidget(url="/test/url/", result_hidden=result_hidden)
 
-    def get_form(self):
+    def get_form(self, result_hidden=False):
         class MyForm(forms.Form):
-            my_field = forms.CharField(label="My Field", widget=self.get_widget())
+            my_field = forms.CharField(label="My Field", widget=self.get_widget(result_hidden=result_hidden))
 
         return MyForm()
 
+    def render_form(self, result_hidden=False):
+        self.form_rendering = self.template.render(
+            RequestContext(request=HttpRequest(), dict_={'form': self.get_form(result_hidden=result_hidden), })
+        )
+
     def setUp(self):
-        self.form = self.get_form()
         self.template = Template(
             """
             {{ form.media }}
@@ -30,9 +34,7 @@ class JsTreeWidgetTestCase(TestCase):
             </form>
             """
         )
-        self.form_rendering = self.template.render(
-            RequestContext(request=HttpRequest(), dict_={'form': self.form, })
-        )
+        self.render_form()
 
     def test_field_ispresent(self):
         self.assertIn('id="id_my_field"', self.form_rendering)
@@ -50,3 +52,7 @@ class JsTreeWidgetTestCase(TestCase):
 
     def test_custom_js_ispresent(self):
         self.assertIn('<script type="text/javascript">', self.form_rendering)
+
+    def test_hidden_field_ispresent(self):
+        self.render_form(result_hidden=True)
+        self.assertIn('<input type="hidden" name="my_field" id="id_my_field"', self.form_rendering)

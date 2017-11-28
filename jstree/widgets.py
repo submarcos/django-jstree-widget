@@ -41,12 +41,12 @@ class JsTreeWidget(TextInput):
         rendering = super(JsTreeWidget, self).render(name, value, attrs=attrs)
         div_id = "{}-tree".format(name)
         # add custom HTML div
-        template = get_template("diva_monitor/widgets/jstree.div.html")
+        template = get_template("jstree/jstree.div.html")
         rendering = "{}{}".format(rendering,
                                   template.render({'div_id': div_id,
                                                    'field_name': name, }))
         # add custom JS script
-        template = get_template("diva_monitor/widgets/jstree.init.js")
+        template = get_template("jstree/jstree.init.js")
         rendering = "{}{}".format(rendering,
                                   template.render({'div_id': div_id,
                                                    'field_name': name,
