@@ -46,3 +46,8 @@ class BootstrapJsTreeWidget(JsTreeWidget):
         }
 
 ```
+
+## Evolution
+
+- Any contribution (tested and documented) is welcome
+- Next evolve : ability to use node selection in jstree
