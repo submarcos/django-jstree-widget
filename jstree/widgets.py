@@ -29,12 +29,12 @@ class JsTreeWidget(TextInput):
         rendering = super(JsTreeWidget, self).render(name, value, attrs=attrs)
         div_id = "{}-tree".format(name)
         rendering = "{}{}".format(rendering,
-                                  get_template("jstree/widgets/jstree.div.html").render(
+                                  get_template("jstree/jstree.div.html").render(
                                       {'div_id': div_id,
                                        'field_name': name, })
                                   )
         rendering = "{}{}".format(rendering,
-                                  get_template("jstree/widgets/jstree.init.js").render(
+                                  get_template("jstree/jstree.init.js").render(
                                       {'div_id': div_id,
                                        'field_name': name,
                                        'url': self.url})

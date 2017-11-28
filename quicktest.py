@@ -2,7 +2,7 @@ import argparse
 import sys
 
 import django
-from django.conf import settings
+from django.conf import settings, global_settings
 from django.test.runner import DiscoverRunner as Runner
 
 
@@ -14,13 +14,6 @@ class QuickDjangoTest(object):
     Based on a script published by Lukasz Dziedzia at:
     http://stackoverflow.com/questions/3841725/how-to-launch-tests-for-django-reusable-app
     """
-    INSTALLED_APPS = [
-        'django.contrib.staticfiles',
-        'django.contrib.auth',
-        'django.contrib.contenttypes',
-        'django.contrib.sessions',
-        'django.contrib.admin',
-    ]
 
     def __init__(self, *args, **kwargs):
         self.apps = args
@@ -30,25 +23,46 @@ class QuickDjangoTest(object):
         """
         Fire up the Django test suite
         """
-        settings.configure({
+        conf = {
             'DATABASES': {
                 'default': {
                     'ENGINE': 'django.db.backends.sqlite3',
                     'NAME': 'database.db',
                 }
             },
-            'INSTALLED_APPS': self.INSTALLED_APPS + self.apps,
+            'INSTALLED_APPS': [
+                'django.contrib.staticfiles',
+                'django.contrib.auth',
+                'django.contrib.contenttypes',
+                'django.contrib.sessions',
+                'django.contrib.admin',
+                'jstree',
+            ],
             'STATIC_URL': '/static/',
-            'TEMPLATES': {
+            'TEMPLATES': [{
                 'BACKEND': 'django.template.backends.django.DjangoTemplates',
                 'OPTIONS': {
                     'context_processors': [
                         'django.contrib.auth.context_processors.auth',
-                    ]
+                        'django.template.context_processors.debug',
+                        'django.template.context_processors.i18n',
+                        'django.template.context_processors.media',
+                        'django.template.context_processors.static',
+                        'django.template.context_processors.tz',
+                        'django.contrib.messages.context_processors.messages',
+                    ],
                 },
                 'APP_DIRS': True,
-            }
-        })
+            }],
+            'LOGGING_CONFIG': None,
+            'LOGGING': None,
+            'FORCE_SCRIPT_NAME': None,
+            'DEBUG': True,
+            'DEFAULT_INDEX_TABLESPACE': None,
+            'DEFAULT_TABLESPACE': None
+        }
+
+        settings.configure(**conf)
         django.setup()
 
         failures = Runner().run_tests(self.apps, verbosity=1)
