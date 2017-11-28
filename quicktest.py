@@ -76,4 +76,4 @@ if __name__ == '__main__':
     )
     parser.add_argument('apps', nargs='+', type=str)
     args = parser.parse_args()
-    QuickDjangoTest(apps=args.apps, db=args.db)
+    QuickDjangoTest(apps=args.apps)
