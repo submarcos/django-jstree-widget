@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 
 import argparse
-import os
 import sys
 
 import django
@@ -17,7 +16,6 @@ class QuickDjangoTest(object):
     Based on a script published by Lukasz Dziedzia at:
     http://stackoverflow.com/questions/3841725/how-to-launch-tests-for-django-reusable-app
     """
-    DIRNAME = os.path.dirname(__file__)
     INSTALLED_APPS = [
         'django.contrib.staticfiles',
         'django.contrib.auth',
@@ -25,16 +23,6 @@ class QuickDjangoTest(object):
         'django.contrib.sessions',
         'django.contrib.admin',
     ]
-
-    TEMPLATES = {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'OPTIONS': {
-            'context_processors': [
-                'django.contrib.auth.context_processors.auth',
-            ]
-        },
-        'APP_DIRS': True,
-    }
 
     def __init__(self, *args, **kwargs):
         self.apps = kwargs.get('apps', [])
@@ -48,12 +36,20 @@ class QuickDjangoTest(object):
             'DATABASES': {
                 'default': {
                     'ENGINE': 'django.db.backends.sqlite3',
-                    'NAME': os.path.join(self.DIRNAME, 'database.db'),
+                    'NAME': 'database.db',
                 }
             },
             'INSTALLED_APPS': self.INSTALLED_APPS + self.apps,
             'STATIC_URL': '/static/',
-            'TEMPLATES': self.TEMPLATES
+            'TEMPLATES': {
+                'BACKEND': 'django.template.backends.django.DjangoTemplates',
+                'OPTIONS': {
+                    'context_processors': [
+                        'django.contrib.auth.context_processors.auth',
+                    ]
+                },
+                'APP_DIRS': True,
+            }
         }
 
         settings.configure(**conf)
@@ -69,7 +65,7 @@ if __name__ == '__main__':
     """
     What do when the user hits this file from the shell.
     Example usage:
-        $ python quicktest.py app1 app2 --db=sqlite
+        $ python quicktest.py app1 app2
     """
     parser = argparse.ArgumentParser(
         description="Run Django tests on the provided applications."

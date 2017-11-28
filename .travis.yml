@@ -19,18 +19,13 @@ matrix:
 
 install:
    # This is a dependency of our Django test script
- - pip install argparse
- - if [[ $DJANGO_VERSION == dev ]]; then pip
-   install https://github.com/django/django/tarball/master/django.tar.gz#egg=django; else pip
-   install -q Django==$DJANGO_VERSION; fi
-
- - pip install coverage
- - pip install flake8
-
+ - pip install argparse coverage flake8
+ - if [[ $DJANGO_VERSION == dev ]]; then
+     pip install https://github.com/django/django/tarball/master/django.tar.gz#egg=django;
+   else
+     pip install -q Django==$DJANGO_VERSION;
+   fi
  - python setup.py develop
-
- - pip freeze
- - dpkg -l
 
 before_script:
  - flake8 --ignore=E501 leaflet
@@ -42,3 +37,7 @@ after_success:
  - coverage run quicktest.py leaflet --db=$DATABASE
  - pip install coveralls
  - coveralls
+
+after_failure:
+ - pip freeze
+ - dpkg -l
