@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import argparse
 import sys
 
@@ -52,7 +50,7 @@ class QuickDjangoTest(object):
             }
         }
 
-        settings.configure(**conf)
+        settings.configure(options=conf)
         django.setup()
 
         failures = Runner().run_tests(self.apps, verbosity=1)
