@@ -50,4 +50,9 @@ class BootstrapJsTreeWidget(JsTreeWidget):
 ## Evolution
 
 - Any contribution (tested and documented) is welcome
-- Next evolve : ability to use node selection in jstree
+- Next evolves :
+  * add views examples for models with JSonResponse and DjangoRestFramework
+  * add view to navigate path on server
+  * ability to use node selection in jstree
+  * !! implement all jstree options !!
+  
