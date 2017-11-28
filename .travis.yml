@@ -37,7 +37,7 @@ script:
  - python quicktest.py jstree
 
 after_success:
- - coverage run quicktest.py leaflet --db=$DATABASE
+ - coverage run quicktest.py jstree
  - pip install coveralls
  - coveralls
 
