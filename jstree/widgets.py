@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
 
+from django.conf import settings
 from django.forms.widgets import TextInput
 from django.template.loader import get_template
-from django.conf import settings
 
 
 class JsTreeWidget(TextInput):

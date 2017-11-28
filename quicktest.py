@@ -2,7 +2,7 @@ import argparse
 import sys
 
 import django
-from django.conf import settings, global_settings
+from django.conf import settings
 from django.test.runner import DiscoverRunner as Runner
 
 

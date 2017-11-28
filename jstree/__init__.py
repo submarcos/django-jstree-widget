@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+
 import os
 
 dir_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))

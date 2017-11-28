@@ -1,11 +1,12 @@
 from __future__ import unicode_literals
 
+from django import forms
 from django.http.request import HttpRequest
+from django.template import Template
 from django.template.context import RequestContext
 from django.test import TestCase
-from django import forms
+
 from jstree import widgets
-from django.template import Template
 
 
 class JsTreeWidgetTestCase(TestCase):
