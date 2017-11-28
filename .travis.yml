@@ -28,7 +28,7 @@ install:
  - python setup.py develop
 
 before_script:
- - flake8 --ignore=E501 leaflet
+ - flake8 --ignore=E501 jstree
 
 script:
  - python quicktest.py jstree
