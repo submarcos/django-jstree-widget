@@ -23,14 +23,14 @@ class QuickDjangoTest(object):
     ]
 
     def __init__(self, *args, **kwargs):
-        self.apps = kwargs.get('apps', [])
+        self.apps = args
         self.run_tests()
 
     def run_tests(self):
         """
         Fire up the Django test suite
         """
-        conf = {
+        settings.configure({
             'DATABASES': {
                 'default': {
                     'ENGINE': 'django.db.backends.sqlite3',
@@ -48,9 +48,7 @@ class QuickDjangoTest(object):
                 },
                 'APP_DIRS': True,
             }
-        }
-
-        settings.configure(options=conf)
+        })
         django.setup()
 
         failures = Runner().run_tests(self.apps, verbosity=1)
@@ -66,6 +64,7 @@ if __name__ == '__main__':
         $ python quicktest.py app1 app2
     """
     parser = argparse.ArgumentParser(
+        usage="[args]",
         description="Run Django tests on the provided applications."
     )
     parser.add_argument('apps', nargs='+', type=str)
