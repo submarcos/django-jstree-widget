@@ -47,7 +47,7 @@ class QuickDjangoTest(object):
         conf = {
             'DATABASES': {
                 'default': {
-                    'ENGINE': 'django.db.backends.sqlite',
+                    'ENGINE': 'django.db.backends.sqlite3',
                     'NAME': os.path.join(self.DIRNAME, 'database.db'),
                 }
             },
