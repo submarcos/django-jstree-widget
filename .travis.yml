@@ -3,6 +3,7 @@ language: python
 
 python:
   - 2.7
+  - 3.4
   - 3.5
   - 3.6
 
@@ -13,8 +14,10 @@ env:
 
 matrix:
   exclude:
-    # django >1.11 does not support python 2 anymore
+    # django >1.11 does not support python >=2 and < 3.4
     - python: 2.7
+      env: DJANGO_VERSION=dev
+    - python: 3.4
       env: DJANGO_VERSION=dev
 
 install:
