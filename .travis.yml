@@ -17,6 +17,12 @@ matrix:
     - python: 2.7
       env: DJANGO_VERSION=dev
 
+allow_failures:
+    - python: 3.7
+      env: DJANGO_VERSION=1.11.7
+    - python: 3.7
+      env: DJANGO_VERSION=dev
+
 install:
    # This is a dependency of our Django test script
  - pip install argparse coverage flake8
