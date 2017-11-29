@@ -37,6 +37,8 @@ INSTALLED_APPS = (
 
 - To use a different theme, include theme folder on accessible django static directory and override widget class Media to serve correct css file.
 ```python
+from jstree.widgets import JsTreeWidget
+
 class BootstrapJsTreeWidget(JsTreeWidget):
     class Media(JsTreeWidget.Media):
         css = {
@@ -46,6 +48,12 @@ class BootstrapJsTreeWidget(JsTreeWidget):
         }
 
 ```
+
+## Customization
+
+- JsTreeWidget:
+  * url : define an url which serve AJAX response according JsTree json format 
+  * result_hidden : False by default. If True, field containing result will be hidden as input hidden.
 
 ## Evolution
 
