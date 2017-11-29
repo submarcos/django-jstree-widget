@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.forms.widgets import TextInput
 from django.template.loader import get_template
+from django.utils.safestring import mark_safe
 
 
 class JsTreeWidget(TextInput):
@@ -51,4 +52,4 @@ class JsTreeWidget(TextInput):
                                   template.render({'div_id': div_id,
                                                    'field_name': name,
                                                    'url': self.url, }))
-        return rendering
+        return mark_safe(rendering)
