@@ -1,12 +1,22 @@
 from __future__ import unicode_literals
 
 from django.conf import settings
-from django.forms.widgets import TextInput
+from django.forms.widgets import Input
 from django.template.loader import get_template
 from django.utils.safestring import mark_safe
 
 
-class JsTreeWidget(TextInput):
+class JsTreeWidget(Input):
+    template_name = "jstree/jstree.html"
+    url = None
+    
+    def get_context(self, name, value, attrs):
+        context = super(JsTreeWidget, self).get_context(name, value, attrs)
+        context.update({
+            'url': self.url,
+        })
+        return context
+    
     def __init__(self, url, result_hidden=False, attrs=None):
         """
         JsTreePathFile Doc usage
@@ -19,9 +29,9 @@ class JsTreeWidget(TextInput):
 
         if result_hidden:
             self.input_type = 'hidden'
-            self.template_name = 'django/forms/widgets/hidden.html'
 
         else:
+            self.input_type = 'text'
             # custom widget if not specified in attrs
             self.attrs.setdefault('readonly', True)
             self.attrs.setdefault('required', True)
@@ -37,19 +47,3 @@ class JsTreeWidget(TextInput):
         js = (
             'jstree/js/jstree{}.js'.format('.min' if settings.DEBUG else ''),
         )
-
-    def render(self, name, value, attrs=None, renderer=None):
-        rendering = super(JsTreeWidget, self).render(name, value, attrs=attrs)
-        div_id = "{}-tree".format(name)
-        # add custom HTML div
-        template = get_template("jstree/jstree.div.html")
-        rendering = "{}{}".format(rendering,
-                                  template.render({'div_id': div_id,
-                                                   'field_name': name, }))
-        # add custom JS script
-        template = get_template("jstree/jstree.init.js")
-        rendering = "{}{}".format(rendering,
-                                  template.render({'div_id': div_id,
-                                                   'field_name': name,
-                                                   'url': self.url, }))
-        return mark_safe(rendering)
