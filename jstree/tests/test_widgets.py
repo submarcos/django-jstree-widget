@@ -10,12 +10,19 @@ from jstree import widgets
 
 
 class JsTreeWidgetTestCase(TestCase):
+    def __init__(self, *args, **kwargs):
+        self.url = None
+        self.form_rendering = None
+        self.template = None
+        super(JsTreeWidgetTestCase, self).__init__(*args, **kwargs)
+
     def get_widget(self, result_hidden=False):
         return widgets.JsTreeWidget(url=self.url, result_hidden=result_hidden)
 
     def get_form(self, result_hidden=False):
         class MyForm(forms.Form):
-            my_field = forms.CharField(label="My Field", widget=self.get_widget(result_hidden=result_hidden))
+            my_field = forms.CharField(label="My Field with é"'(-èè_çà',
+                                       widget=self.get_widget(result_hidden=result_hidden))
 
         return MyForm()
 
