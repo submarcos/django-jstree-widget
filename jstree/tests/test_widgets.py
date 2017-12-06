@@ -61,4 +61,3 @@ class JsTreeWidgetTestCase(TestCase):
 
     def test_url_ispresent(self):
         self.assertIn('{}'.format(self.url), self.form_rendering)
-

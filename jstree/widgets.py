@@ -2,21 +2,19 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.forms.widgets import Input
-from django.template.loader import get_template
-from django.utils.safestring import mark_safe
 
 
 class JsTreeWidget(Input):
     template_name = "jstree/jstree.html"
     url = None
-    
+
     def get_context(self, name, value, attrs):
         context = super(JsTreeWidget, self).get_context(name, value, attrs)
         context.update({
             'url': self.url,
         })
         return context
-    
+
     def __init__(self, url, result_hidden=False, attrs=None):
         """
         JsTreePathFile Doc usage
