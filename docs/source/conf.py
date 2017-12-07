@@ -56,7 +56,7 @@ author = 'Jean-Etienne Castagnede'
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
-with open(os.path.join(os.path.dirname(os.path.dirname(__file__))), 'r') as version_file:
+with open(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'VERSION'), 'r') as version_file:
     # The full version, including alpha/beta/rc tags.
     release = version_file.read()
     # The short X.Y version.
