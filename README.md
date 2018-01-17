@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/submarcos/django-jstree-widget/badge.svg?branch=master)](https://coveralls.io/github/submarcos/django-jstree-widget?branch=master)
+[![Build Status](https://travis-ci.org/submarcos/django-jstree-widget.svg?branch=master)](https://travis-ci.org/submarcos/django-jstree-widget)
 
 # django-jstree-widget
 
