@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/submarcos/django-jstree-widget/badge.svg?branch=master)](https://coveralls.io/github/submarcos/django-jstree-widget?branch=master)
+
 # django-jstree-widget
 
     Customizable widget to serve jstree with django.
