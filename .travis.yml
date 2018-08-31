@@ -45,10 +45,9 @@ before_script:
  - flake8 --ignore=E501 jstree
 
 script:
- - python quicktest.py jstree
+ - coverage run quicktest.py jstree
 
 after_success:
- - coverage run quicktest.py jstree
  - pip install coveralls
  - coveralls
 
