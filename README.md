@@ -7,7 +7,7 @@
 
 ## Requirements
 
-- django 1.11 +
+- Django 1.11 +
 - jquery (jsTree requires 1.9.0 or greater in your webpage. You can use a CDN version or include a local copy.)
   
   `<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>`
@@ -26,19 +26,24 @@ my_field = forms.CharField(label="My field", widget=JsTreeWidget(url=reverse("ap
 ## Installation
 
 - add jstree to your INSTALLED_APPS in your project settings
+
 ```python
+
 INSTALLED_APPS = (
     ...
     'jstree',
     ...
 )
+
 ```
 
 
 ## Configuration
 
 - To use a different theme, include theme folder on accessible django static directory and override widget class Media to serve correct css file.
+
 ```python
+
 from jstree.widgets import JsTreeWidget
 
 class BootstrapJsTreeWidget(JsTreeWidget):
