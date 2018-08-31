@@ -6,24 +6,30 @@ python:
   - 3.4
   - 3.5
   - 3.6
+  - 3.7
 
 env:
   matrix:
-  - DJANGO_VERSION=1.11.7
-  - DJANGO_VERSION=2.0
+  - DJANGO_VERSION=1.11.15
+  - DJANGO_VERSION=2.0.8
+  - DJANGO_VERSION=2.1.1
   - DJANGO_VERSION=dev
 
 matrix:
   exclude:
     # django >1.11 does not support python >=2 and < 3.4
     - python: 2.7
-      env: DJANGO_VERSION=2.0
-    - python: 3.4
-      env: DJANGO_VERSION=2.0
+      env: DJANGO_VERSION=2.0.8
+    - python: 2.7
+      env: DJANGO_VERSION=2.1.1
     - python: 2.7
       env: DJANGO_VERSION=dev
     - python: 3.4
+      env: DJANGO_VERSION=2.1.1
+    - python: 3.4
       env: DJANGO_VERSION=dev
+    - python: 3.7
+      env: DJANGO_VERSION=1.11.15
 
 install:
    # This is a dependency of our Django test script
