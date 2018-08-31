@@ -31,11 +31,12 @@ class QuickDjangoTest(object):
                 }
             },
             'INSTALLED_APPS': [
-                'django.contrib.staticfiles',
+                'django.contrib.admin',
                 'django.contrib.auth',
                 'django.contrib.contenttypes',
                 'django.contrib.sessions',
-                'django.contrib.admin',
+                'django.contrib.messages',
+                'django.contrib.staticfiles',
                 'jstree',
             ],
             'STATIC_URL': '/static/',
@@ -59,7 +60,16 @@ class QuickDjangoTest(object):
             'FORCE_SCRIPT_NAME': None,
             'DEBUG': True,
             'DEFAULT_INDEX_TABLESPACE': None,
-            'DEFAULT_TABLESPACE': None
+            'DEFAULT_TABLESPACE': None,
+            'MIDDLEWARE': [
+                'django.middleware.security.SecurityMiddleware',
+                'django.contrib.sessions.middleware.SessionMiddleware',
+                'django.middleware.common.CommonMiddleware',
+                'django.middleware.csrf.CsrfViewMiddleware',
+                'django.contrib.auth.middleware.AuthenticationMiddleware',
+                'django.contrib.messages.middleware.MessageMiddleware',
+                'django.middleware.clickjacking.XFrameOptionsMiddleware',
+            ]
         }
 
         settings.configure(**conf)
